@@ -134,11 +134,11 @@ class _BottomMenuState extends State<BottomMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.shopping_cart,
+                            Icons.checkroom,
                             color: statusLayar.currentTab == 2 ? primaryColor : Colors.grey,
                           ),
                           Text(
-                            'Cart',
+                            'Room',
                             style: TextStyle(
                               color: statusLayar.currentTab == 2 ? primaryColor : Colors.grey,
                               fontFamily: 'Poppins',
