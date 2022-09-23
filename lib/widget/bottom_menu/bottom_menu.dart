@@ -27,9 +27,10 @@ class _BottomMenuState extends State<BottomMenu> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: secondaryColor,
-        child: const Icon(
-          Icons.assignment,
-          color: Colors.white,
+        child: Image.asset(
+          'lib/assets/images/logoWhite.png',
+          height: 50,
+          width: 50,
         ),
         onPressed: (){
           Navigator.push(
@@ -41,6 +42,7 @@ class _BottomMenuState extends State<BottomMenu> {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 5,
+        elevation: 10,
         child: SizedBox(
           height: 60,
           child: Row(
