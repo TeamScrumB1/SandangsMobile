@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sandangs/constant.dart';
+import 'package:sandangs/widget/gridview/produk_gridview.dart';
 import 'package:sandangs/widget/listview/desainer_listview.dart';
 import 'package:sandangs/widget/listview/konveksi_listview.dart';
 import 'package:sandangs/widget/main_button/main_button.dart';
@@ -84,6 +85,7 @@ class _HomePagesState extends State<HomePages> {
             SubTittle(sub: "Top Konveksi"),
             KonveksiListview(),
             SubTittle(sub: "Rekomendasi Produk"),
+            ProdukGridview(),
           ],
         ),
       ),
