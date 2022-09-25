@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sandangs/constant.dart';
+import 'package:sandangs/widget/appbar.dart';
 import 'package:sandangs/widget/gridview/produk_gridview.dart';
 import 'package:sandangs/widget/listview/desainer_listview.dart';
 import 'package:sandangs/widget/listview/konveksi_listview.dart';
@@ -54,28 +55,7 @@ class _HomePagesState extends State<HomePages> {
         return shouldpop!;
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Image.asset(
-            'lib/assets/images/textlogo.png',
-            width: 130,
-            height: 130,
-          ),
-          automaticallyImplyLeading: false,
-          actions: [
-            Center(
-              child: IconButton(
-                icon  : Icon(
-                  Icons.shopping_cart,
-                  size: 25,
-                  color: secondaryColor,
-                ),
-                onPressed: (){},
-              ),
-            )
-          ],
-        ),
+        appBar: const AppBarApps(),
         body: ListView(
           children: const [
             SlideView(),
