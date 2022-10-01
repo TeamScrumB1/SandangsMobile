@@ -16,12 +16,12 @@ class SlideView extends StatelessWidget {
         enlargeCenterPage: true,
       ),
       items: imgList.map((item) => Container(
-        margin: const EdgeInsets.all(15.0),
+        margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           child: Stack(
             children: [
-              Image.network(
+              Image.asset(
                 item,
                 fit: BoxFit.cover,
                 width: 1000,

@@ -45,12 +45,7 @@ class CardProduct extends StatelessWidget {
                       children : [
                         Text(
                           'Rp '+ produk.harga,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: 'Poppins',
-                            color: secondaryColor,
-                          ),
+                          style: hargaCard,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

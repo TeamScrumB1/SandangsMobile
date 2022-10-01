@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:sandangs/models/desainer_model.dart';
 import 'package:http/http.dart'as http;
 
-class ApiServiceTopDeainer{
+class ApiServiceTopDesainer{
   Future<Desainer> topHeadLines() async{
     final response = await http.get(
       Uri.parse('https://api.yufagency.com/desainer_desc_rating')

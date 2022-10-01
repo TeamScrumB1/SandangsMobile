@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sandangs/constant.dart';
-import 'package:sandangs/widget/appbar.dart';
+import 'package:sandangs/widget/appbar_custom/appbar.dart';
 import 'package:sandangs/widget/fitting/container_product.dart';
 import 'package:sandangs/widget/fitting/kategori_produk_fitting.dart';
 import 'package:sandangs/widget/provider/fitting_room_provider.dart';
@@ -15,7 +15,7 @@ class FittingRoom extends StatefulWidget {
 
 class _FittingRoomState extends State<FittingRoom> {
   int click = 0;
-  int fitur = 0;
+  int swap = 0;
   String busanaAtasan = "";
   String busanaBawahan = "";
 
@@ -41,7 +41,6 @@ class _FittingRoomState extends State<FittingRoom> {
                     busanaAtasan: busanaAtasan,
                     busanaBawahan: busanaBawahan,
                     click: click,
-                    fitur: fitur,
                   ),
                   Container(
                     height: size.height*0.5,
@@ -92,16 +91,20 @@ class _FittingRoomState extends State<FittingRoom> {
                         SizedBox(height: 5),
                         Container(
                           margin: EdgeInsets.only(top: 10,bottom: 5),
-                          child: Text('Fitur'),
+                          child: Text('Swap'),
                         ),//ikon pilihan bawahan
                         CircleAvatar(
                             radius: 35,
-                            backgroundColor: fitur == 0? secondaryColor : Color(0xD5C4C4C4),
+                            backgroundColor: secondaryColor,
                             child: InkWell(
                               onTap: () {
                                 setState(() {
-                                  fitur = 0;
-                                  fittingRoom.setFitur(fitur);
+                                  if(swap == 0){
+                                    swap = 1;
+                                  } else {
+                                    swap = 0;
+                                  }
+                                  fittingRoom.setSwap(swap);
                                 });
                               },
                               child: CircleAvatar(
@@ -111,25 +114,24 @@ class _FittingRoomState extends State<FittingRoom> {
                               ),
                             )
                         ),
-                        SizedBox(height: 5),
-                        CircleAvatar(
-                            radius: 35,
-                            backgroundColor: fitur == 1 ? secondaryColor : Color(0xD5C4C4C4),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  fitur = 1;
-                                  fittingRoom.setFitur(fitur);
-                                });
-                              },
-                              child: CircleAvatar(
-                                backgroundColor: Colors.white,
-                                radius: 32,
-                                child: Icon(Icons.zoom_in),
-                              ),
-                            )
-                        ),
-
+                        // SizedBox(height: 5),
+                        // CircleAvatar(
+                        //     radius: 35,
+                        //     backgroundColor: fitur == 1 ? secondaryColor : Color(0xD5C4C4C4),
+                        //     child: InkWell(
+                        //       onTap: () {
+                        //         setState(() {
+                        //           fitur = 1;
+                        //           fittingRoom.setFitur(fitur);
+                        //         });
+                        //       },
+                        //       child: CircleAvatar(
+                        //         backgroundColor: Colors.white,
+                        //         radius: 32,
+                        //         child: Icon(Icons.zoom_in),
+                        //       ),
+                        //     )
+                        // ),
                       ],
                     ),
                   ),

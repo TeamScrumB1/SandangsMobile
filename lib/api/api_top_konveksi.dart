@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart'as http;
 import 'package:sandangs/models/konveksi_model.dart';
 
-class ApiServiceKonveksi{
+class ApiServiceTopKonveksi{
   Future<Konveksi> topHeadLines() async{
     final response = await http.get(
         Uri.parse('https://api.yufagency.com/konveksi_desc_rating')

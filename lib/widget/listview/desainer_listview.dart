@@ -17,7 +17,7 @@ class _DesainerListviewState extends State<DesainerListview> {
   @override
   void initState(){
     super.initState();
-    desainerApi = ApiServiceTopDeainer().topHeadLines();
+    desainerApi = ApiServiceTopDesainer().topHeadLines();
   }
 
   @override

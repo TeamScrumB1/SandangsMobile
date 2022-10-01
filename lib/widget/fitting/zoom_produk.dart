@@ -20,9 +20,12 @@ class _ZoomProdukState extends State<ZoomProduk> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Image.asset(
-        widget.busana,
-        width: widget.initialScale,
+      child: Container(
+        width: widget.scaleFactor,
+        height: widget.scaleFactor,
+        child: Image.asset(
+          widget.busana,
+        ),
       ),
       onScaleStart: (details){
         widget.initialScale = widget.scaleFactor;

@@ -17,7 +17,7 @@ class _KonveksiListviewState extends State<KonveksiListview> {
   @override
   void initState(){
     super.initState();
-    konveksiApi = ApiServiceKonveksi().topHeadLines();
+    konveksiApi = ApiServiceTopKonveksi().topHeadLines();
   }
 
   @override

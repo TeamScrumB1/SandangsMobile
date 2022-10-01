@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sandangs/api/api_produk.dart';
 import 'package:sandangs/models/produk_model.dart';
+import 'package:sandangs/pages/detail_produk.dart';
 import 'package:sandangs/widget/card/produk_card.dart';
 
 class ProdukGridview extends StatefulWidget {
@@ -45,7 +46,7 @@ class _ProdukGridviewState extends State<ProdukGridview> {
                         await Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context){
-                              return Container();
+                              return DetailProduct(detail: produk!);
                             })
                         );
                       },
