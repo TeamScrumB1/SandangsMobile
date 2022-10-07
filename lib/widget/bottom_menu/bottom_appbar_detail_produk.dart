@@ -20,51 +20,70 @@ class BottomAppbarDetailProduk extends StatelessWidget {
               )
             ]
         ),
-        height: size.height*0.06,
-        child: Row(
-          children: [
-            Container(
-              width: size.width*0.2,
-              alignment: Alignment.center,
-              child: IconButton(
-                icon: Icon(
-                  Icons.add_shopping_cart_outlined,
-                  color: secondaryColor,
+        height: size.height*0.07,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: size.width*0.18,
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: secondaryColor),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                iconSize: 25,
-                onPressed: (){},
-              ),
-            ),
-            Container(
-              width: size.width*0.2,
-              alignment: Alignment.center,
-              child: IconButton(
-                icon: Icon(
-                  Icons.accessibility_outlined,
-                  color: secondaryColor,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.accessibility_outlined,
+                    color: secondaryColor,
+                  ),
+                  iconSize: 25,
+                  onPressed: (){},
                 ),
-                iconSize: 25,
-                onPressed: (){},
               ),
-            ),
-            Container(
-              width: size.width*0.6,
-              alignment: Alignment.center,
-              color: orangePrice,
-              child: TextButton(
-                onPressed: (){},
-                child: Text(
-                  'Buy Now',
-                  style: TextStyle(
+              Container(
+                width: size.width*0.18,
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal:5,vertical: 5),
+                decoration: BoxDecoration(
+                  color: secondaryColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.add_shopping_cart_outlined,
                     color: Colors.white,
-                    fontSize: 18,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.bold,
+                  ),
+                  iconSize: 25,
+                  onPressed: (){},
+                ),
+              ),
+              Container(
+                width: size.width*0.5,
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal:5,vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: orangePrice,
+                ),
+                child: TextButton(
+                  onPressed: (){},
+                  child: Text(
+                    'Buy Now',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

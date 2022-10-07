@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/produk_model.dart';
@@ -16,13 +15,12 @@ class DetailProduct extends StatefulWidget {
 }
 
 class _DetailProductState extends State<DetailProduct> {
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: BottomAppbarDetailProduk(),
-      appBar: AppBarBack(),
+      bottomNavigationBar: const BottomAppbarDetailProduk(),
+      appBar: const AppBarBack(),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Stack(
@@ -37,7 +35,7 @@ class _DetailProductState extends State<DetailProduct> {
             ),
             Container(
               margin: EdgeInsets.only(top:size.height*0.4),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40),
@@ -47,18 +45,18 @@ class _DetailProductState extends State<DetailProduct> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                    margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: Row(
                       children: [
                         Text(
                           widget.detail.nama,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           'Rp ' +widget.detail.harga,
                           style: TextStyle(
@@ -72,25 +70,25 @@ class _DetailProductState extends State<DetailProduct> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal:20),
+                    margin: const EdgeInsets.symmetric(horizontal:20),
                     child: Row(
                       children: <Widget>[
                         RatingBarIndicator(
                           rating: double.parse(widget.detail.rating),
                           itemBuilder: (_, __) {
-                            return Icon(
+                            return const Icon(
                               Icons.star,
                               color: Colors.amber,
                             );
                           },
                           itemSize: 20,
                         ),
-                        Text(' '+ widget.detail.rating,style: TextStyle(fontSize: 15),),
+                        Text(' '+ widget.detail.rating,style: const TextStyle(fontSize: 15),),
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                     child: Text(
                       widget.detail.deskripsi,
                       textAlign: TextAlign.justify,
@@ -98,114 +96,109 @@ class _DetailProductState extends State<DetailProduct> {
                   ),
                   Divider(
                     color: greyCustom,
-                    height: 25,
+                    height: 20,
                     thickness: 2,
                     indent: 5,
                     endIndent: 5,
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 0),
-                    child: Padding(
-                        padding: EdgeInsets.only(top: 5, left: 30, bottom: 20),
-                        child:Row(
-                          children:[
-                            CircleAvatar(
-                              backgroundImage: CachedNetworkImageProvider(
-                                widget.detail.imgDesainer,
-                              ),
-                              radius: 40,
+                  Padding(
+                      padding: EdgeInsets.only(top: 5, left: 30, bottom: 20),
+                      child:Row(
+                        children:[
+                          CircleAvatar(
+                            backgroundImage: CachedNetworkImageProvider(
+                              widget.detail.imgDesainer,
                             ),
-                            SizedBox(width: 43,),
-                            Container(
-                              child: Column(
+                            radius: 50,
+                          ),
+                          SizedBox(width: 43,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        widget.detail.namaDesainer,
-                                        style:  TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      SizedBox(height: 2,),
-                                      Text(
-                                        'Desainer '+widget.detail.kategoriDesainer,
-                                        style:  TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  ElevatedButton(
-                                    child: Text("Kunjungi",
-                                      style:  TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    onPressed: (){
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.white,
-                                      onPrimary: secondaryColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
-                                        side: BorderSide(color: secondaryColor,width: 1),
-                                      ),
+                                  Text(
+                                    widget.detail.namaDesainer,
+                                    style:  TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(height: 5),
-                                  Column(
+                                  SizedBox(height: 2,),
+                                  Text(
+                                    'Desainer '+widget.detail.kategoriDesainer,
+                                    style:  TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                child: Text("Kunjungi",
+                                  style:  TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                onPressed: (){
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.white,
+                                  onPrimary: secondaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side: BorderSide(color: secondaryColor,width: 1),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                widget.detail.ratingDesainer,
-                                                style:  TextStyle(
-                                                  fontSize: 14,
-                                                  color: secondaryColor,
-                                                ),
-                                              ),
-                                              Text(
-                                                  "  Penilaian"
-                                              ),
-                                            ],
+                                          Text(
+                                            widget.detail.ratingDesainer,
+                                            style:  TextStyle(
+                                              fontSize: 14,
+                                              color: secondaryColor,
+                                            ),
                                           ),
-                                          SizedBox(width: 10,),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                widget.detail.projekDesainer,
-                                                style:  TextStyle(
-                                                  fontSize: 14,
-                                                  color: secondaryColor,
-                                                ),
-                                              ),
-                                              Text(
-                                                  " Projek"
-                                              ),
-                                            ],
-                                          )
+                                          Text(
+                                              "  Penilaian"
+                                          ),
                                         ],
                                       ),
+                                      SizedBox(width: 10,),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            widget.detail.projekDesainer,
+                                            style:  TextStyle(
+                                              fontSize: 14,
+                                              color: secondaryColor,
+                                            ),
+                                          ),
+                                          Text(
+                                              " Projek"
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
-                        )
-                    ),
+                            ],
+                          ),
+                        ],
+                      )
                   ),
                   Divider(
                     color: greyCustom,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sandangs/api/api_top_konveksi.dart';
 import 'package:sandangs/models/konveksi_model.dart';
+import 'package:sandangs/pages/detail_konveksi.dart';
 import 'package:sandangs/pages/profil_desainer.dart';
 import 'package:sandangs/widget/card/konveksi_card.dart';
 
@@ -41,7 +42,7 @@ class _KonveksiListviewState extends State<KonveksiListview> {
                     onTap: (){
                       Navigator.push(
                           (context),
-                          MaterialPageRoute(builder: (context) => const ProfilDesainer())
+                          MaterialPageRoute(builder: (context) => DetailKonveksi(konveksi: konveksi!))
                       );
                     },
                     child: CardKonveksi(konveksi: konveksi!),

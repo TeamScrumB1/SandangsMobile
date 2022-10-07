@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sandangs/api/api_kategori.dart';
 import 'package:sandangs/constant.dart';
+import 'package:sandangs/models/produk_model.dart';
 import 'package:sandangs/widget/appbar_custom/appbar.dart';
-import 'package:sandangs/widget/fitting/container_product.dart';
-import 'package:sandangs/widget/fitting/kategori_produk_fitting.dart';
+import 'package:sandangs/widget/fitting/list_kategori.dart';
 import 'package:sandangs/widget/provider/fitting_room_provider.dart';
 
 class FittingRoom extends StatefulWidget {
@@ -16,19 +18,41 @@ class FittingRoom extends StatefulWidget {
 class _FittingRoomState extends State<FittingRoom> {
   int click = 0;
   int swap = 0;
-  String busanaAtasan = "";
-  String busanaBawahan = "";
+  int index = 0;
+  int status = 0;
+  int checkAtasan = 0;
+  int checkBawahan = 0;
+  late Future<Produk> produkApi;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    busanaAtasan = "lib/assets/images/jaket.png";
-    busanaBawahan = "lib/assets/images/celana.png";
+    produkApi = ApiServiceKategori(namaKategori: kategoriList[index].name).topHeadlines();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     var fittingRoom = Provider.of<FittingRoomProv>(context, listen: true);
+    String busanaAtasan = "";
+    String busanaBawahan = "";
+
+
+    setState(() {
+      busanaAtasan = fittingRoom.getAtasan();
+      busanaBawahan = fittingRoom.getBawahan();
+      swap = fittingRoom.getSwap();
+      status = fittingRoom.getStatus();
+      if(status == 0){
+        index = checkAtasan;
+        fittingRoom.setIndexKategori(index);
+        produkApi = ApiServiceKategori(namaKategori: kategoriList[index].name).topHeadlines();
+      }else{
+        index = checkBawahan+3;
+        fittingRoom.setIndexKategori(index);
+        produkApi = ApiServiceKategori(namaKategori: kategoriList[index].name).topHeadlines();
+      }
+    });
 
     return Scaffold(
       appBar: const AppBarApps(),
@@ -37,24 +61,95 @@ class _FittingRoomState extends State<FittingRoom> {
               Stack(
                 clipBehavior: Clip.none,
                 children: <Widget>[
-                  ContainerProduk(
-                    busanaAtasan: busanaAtasan,
-                    busanaBawahan: busanaBawahan,
-                    click: click,
+                  // ContainerProduk(atasan: busanaAtasan,bawahan: busanaBawahan,),
+                  Container(
+                      height: size.height * 0.5,
+                      width: size.width,
+                      margin: EdgeInsets.only(left: 10, right: 10),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: secondaryColor),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: swap == 0 ? Stack(
+                        children: [
+                          Container(
+                            width: size.width,
+                            height: size.height*0.4,
+                            margin: EdgeInsets.only(top: size.height*0.15),
+                            child: InteractiveViewer(
+                              boundaryMargin: EdgeInsets.symmetric(horizontal: 50,vertical: 50),
+                              minScale: 0.1,
+                              maxScale: 1.5,
+                              child: SizedBox(
+                                width: 200,
+                                height: 200,
+                                child: Image.network(busanaBawahan),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width,
+                            height: size.height*0.3,
+                            child: InteractiveViewer(
+                              boundaryMargin: EdgeInsets.symmetric(horizontal: 40,vertical: 40),
+                              minScale: 0.01,
+                              maxScale: 1.5,
+                              child: SizedBox(
+                                width: 200,
+                                height: 200,
+                                child: Image.network(busanaAtasan),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ) : Stack(
+                        children: [
+                          SizedBox(
+                            width: size.width,
+                            height: size.height*0.3,
+                            child: InteractiveViewer(
+                              boundaryMargin: EdgeInsets.symmetric(horizontal: 40,vertical: 40),
+                              minScale: 0.01,
+                              maxScale: 1.5,
+                              child: SizedBox(
+                                width: 200,
+                                height: 200,
+                                child: Image.network(busanaAtasan),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: size.width,
+                            height: size.height*0.4,
+                            margin: EdgeInsets.only(top: size.height*0.15),
+                            child: InteractiveViewer(
+                              boundaryMargin: EdgeInsets.symmetric(horizontal: 50,vertical: 50),
+                              minScale: 0.1,
+                              maxScale: 1.5,
+                              child: SizedBox(
+                                width: 200,
+                                height: 200,
+                                child: Image.network(busanaBawahan),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
                   ),
                   Container(
                     height: size.height*0.5,
                     width: size.width*0.25,
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    margin: EdgeInsets.only(left: 10),
                     child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(bottom: 5),
-                          child: Text('Busana'),
+                          margin: const EdgeInsets.only(bottom: 5),
+                          child: const Text('Busana'),
                         ),
                         CircleAvatar(
                             radius: 35,
-                            backgroundColor: click == 0? secondaryColor : Color(0xD5C4C4C4),
+                            backgroundColor: click == 0? secondaryColor : const Color(0xD5C4C4C4),
                             child: InkWell(
                               onTap: () {
                                 setState(() {
@@ -64,31 +159,30 @@ class _FittingRoomState extends State<FittingRoom> {
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                backgroundImage: AssetImage(busanaAtasan),
+                                backgroundImage: CachedNetworkImageProvider(busanaAtasan),
                                 radius: 32,
                               ),
                             )
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         CircleAvatar(
                             radius: 35,
-                            backgroundColor: click == 1 ? secondaryColor : Color(0xD5C4C4C4),
+                            backgroundColor: click == 1 ? secondaryColor : const Color(0xD5C4C4C4),
                             child: InkWell(
                               onTap: () {
                                 setState(() {
                                   click = 1;
                                   fittingRoom.setStatus(click);
                                 });
-                                print("Click event on Container");
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                backgroundImage: AssetImage(busanaBawahan),
+                                backgroundImage: CachedNetworkImageProvider(busanaBawahan),
                                 radius: 32,
                               ),
                             )
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
                           margin: EdgeInsets.only(top: 10,bottom: 5),
                           child: Text('Swap'),
@@ -114,233 +208,250 @@ class _FittingRoomState extends State<FittingRoom> {
                               ),
                             )
                         ),
-                        // SizedBox(height: 5),
-                        // CircleAvatar(
-                        //     radius: 35,
-                        //     backgroundColor: fitur == 1 ? secondaryColor : Color(0xD5C4C4C4),
-                        //     child: InkWell(
-                        //       onTap: () {
-                        //         setState(() {
-                        //           fitur = 1;
-                        //           fittingRoom.setFitur(fitur);
-                        //         });
-                        //       },
-                        //       child: CircleAvatar(
-                        //         backgroundColor: Colors.white,
-                        //         radius: 32,
-                        //         child: Icon(Icons.zoom_in),
-                        //       ),
-                        //     )
-                        // ),
                       ],
                     ),
                   ),
                 ],
               ),
-              BottomNavbarFittingRoom(),
-              Container(
-                height: 150.0,
-                margin: EdgeInsets.only(left: 12),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    InkWell(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: size.height*0.001),
-                                height: size.height * 0.15,
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('lib/assets/images/kaos.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
+              Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top:5,left: 10,right: 10,bottom: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0.1,
+                        blurRadius: 0.1,
+                        offset: const Offset(0,0.5),
+                      )],
+                    ),
+                    child: status == 0 ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        MaterialButton(
+                          onPressed: ((){
+                            setState(() {
+                              checkAtasan = 0;
+                              index = 0;
+                              fittingRoom.setIndexKategori(index);
+                            });
+                          }),
+                          child: Container(
+                            width: size.width* 0.2,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: checkAtasan == 0? secondaryColor : Colors.white,
+                            ),
+                            child: Text(
+                                kategoriList[0].name,
+                                style : TextStyle(
+                                  color: checkAtasan == 0 ? Colors.white : secondaryColor,
+                                )
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          busanaAtasan = 'lib/assets/images/kaos.png';
-                        });
-                      },
-                    ),
-                    InkWell(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: size.height*0.001),
-                                height: size.height * 0.15,
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('lib/assets/images/jaket.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        MaterialButton(
+                          onPressed: ((){
+                            setState(() {
+                              checkAtasan = 1;
+                              index = 1;
+                              fittingRoom.setIndexKategori(index);
+                            });
+                          }),
+                          child: Container(
+                            width: size.width* 0.2,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: checkAtasan == 1? secondaryColor : Colors.white,
+                            ),
+                            child: Text(
+                                kategoriList[1].name,
+                                style : TextStyle(
+                                  color: checkAtasan == 1 ? Colors.white : secondaryColor,
+                                )
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          busanaAtasan = 'lib/assets/images/jaket.png';
-                        });
-                      },
-                    ),
-                    InkWell(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: size.height*0.001),
-                                height: size.height * 0.15,
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('lib/assets/images/rok.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        MaterialButton(
+                          onPressed: ((){
+                            setState(() {
+                              checkAtasan = 2;
+                              index = 2;
+                              fittingRoom.setIndexKategori(index);
+                            });
+                          }),
+                          child: Container(
+                            width: size.width* 0.2,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: checkAtasan == 2? secondaryColor : Colors.white,
+                            ),
+                            child: Text(
+                                kategoriList[2].name,
+                                style : TextStyle(
+                                  color: checkAtasan == 2 ? Colors.white : secondaryColor,
+                                )
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          busanaBawahan = 'lib/assets/images/rok.png';
-                        });
-                      },
-                    ),
-                    InkWell(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: size.height*0.001),
-                                height: size.height * 0.15,
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('lib/assets/images/batik.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
+                      ],
+                    ) : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        MaterialButton(
+                          onPressed: ((){
+                            setState(() {
+                              checkBawahan = 0;
+                              index = 3;
+                              fittingRoom.setIndexKategori(index);
+                            });
+                          }),
+                          child: Container(
+                            width: size.width* 0.2,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: checkBawahan == 0? secondaryColor : Colors.white,
+                            ),
+                            child: Text(
+                                kategoriList[3].name,
+                                style : TextStyle(
+                                  color: checkBawahan == 0 ? Colors.white : secondaryColor,
+                                )
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          busanaAtasan = 'lib/assets/images/batik.png';
-                        });
-                      },
-                    ),
-                    InkWell(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: size.height*0.001),
-                                height: size.height * 0.15,
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('lib/assets/images/celanapendek.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        MaterialButton(
+                          onPressed: ((){
+                            setState(() {
+                              checkBawahan = 1;
+                              index = 4;
+                              fittingRoom.setIndexKategori(index);
+                            });
+                          }),
+                          child: Container(
+                            width: size.width* 0.2,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: checkBawahan == 1? secondaryColor : Colors.white,
+                            ),
+                            child: Text(
+                                kategoriList[4].name,
+                                style : TextStyle(
+                                  color: checkBawahan == 1 ? Colors.white : secondaryColor,
+                                )
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          busanaBawahan = 'lib/assets/images/celanapendek.png';
-                        });
-                      },
-                    ),
-                    InkWell(
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        elevation: 2,
-                        child: Container(
-                          margin: EdgeInsets.all(5),
-                          width: 100,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: size.height*0.001),
-                                height: size.height * 0.15,
-                                width: size.width * 1,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.fill,
-                                    image: AssetImage('lib/assets/images/jeans.png'),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        MaterialButton(
+                          onPressed: ((){
+                            setState(() {
+                              checkBawahan = 2;
+                              index = 5;
+                              fittingRoom.setIndexKategori(index);
+                            });
+                          }),
+                          child: Container(
+                            width: size.width* 0.2,
+                            height: 40,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: checkBawahan == 2? secondaryColor : Colors.white,
+                            ),
+                            child: Text(
+                                kategoriList[5].name,
+                                style : TextStyle(
+                                  color: checkBawahan == 2 ? Colors.white : secondaryColor,
+                                )
+                            ),
                           ),
                         ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          busanaBawahan = 'lib/assets/images/jeans.png';
-                        });
-                      },
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 150.0,
+                    child: Container(
+                      height: 150,
+                      margin: EdgeInsets.only(left: 10),
+                      child: FutureBuilder(
+                        future: produkApi,
+                        builder: (context, AsyncSnapshot<Produk> snapshot){
+                          var state = snapshot.connectionState;
+                          if(state != ConnectionState.done){
+                            return Center(child: CircularProgressIndicator());
+                          }else{
+                            if(snapshot.hasData){
+                              return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index){
+                                  var produk = snapshot.data?.produk[index];
+                                  return  InkWell(
+                                    child: Card(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15.0),
+                                      ),
+                                      elevation: 2,
+                                      child: Container(
+                                        margin: const EdgeInsets.all(5),
+                                        width: 100,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(top: size.height*0.001),
+                                              height: size.height * 0.15,
+                                              width: size.width * 1,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  fit: BoxFit.fill,
+                                                  image: CachedNetworkImageProvider(produk!.imgProduk),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        if(status == 0){
+                                          fittingRoom.setBusana(produk.imgProduk, fittingRoom.getBawahan());
+                                        }else{
+                                          fittingRoom.setBusana(fittingRoom.getAtasan(), produk.imgProduk);
+                                        }
+                                      });
+                                    },
+                                  );
+                                },
+                                itemCount: snapshot.data?.produk.length,
+                              );
+                            }
+                            else if(snapshot.hasError){
+                              return Center(child: Text(snapshot.error.toString()));
+                            }else{
+                              return Text('Tidak ada Data');
+                            }
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
-
       )
     );
   }

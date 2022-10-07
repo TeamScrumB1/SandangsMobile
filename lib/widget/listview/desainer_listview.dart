@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sandangs/api/api_top_desainer.dart';
 import 'package:sandangs/models/desainer_model.dart';
-import 'package:sandangs/pages/profil_desainer.dart';
+import 'package:sandangs/pages/detail_desainer.dart';
 import 'package:sandangs/widget/card/desainer_card.dart';
 
 class DesainerListview extends StatefulWidget {
@@ -42,7 +42,7 @@ class _DesainerListviewState extends State<DesainerListview> {
                     onTap: (){
                       Navigator.push(
                         (context),
-                        MaterialPageRoute(builder: (context) => const ProfilDesainer())
+                        MaterialPageRoute(builder: (context) => DetailDesainer(desainer: desainer!))
                       );
                     },
                     child: CardDesainer(desainer: desainer!),

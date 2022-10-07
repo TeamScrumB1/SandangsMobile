@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sandangs/api/api_all_desainer.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/desainer_model.dart';
+import 'package:sandangs/pages/detail_desainer.dart';
 import 'package:sandangs/widget/listview/vertical_list_desainer.dart';
 
 
@@ -51,7 +52,7 @@ class Pilih extends State<PilihDesainer> {
                                           onTap: () {
                                             Navigator.push(context,
                                                 MaterialPageRoute(builder: (context) {
-                                                  return Scaffold();
+                                                  return DetailDesainer(desainer: desainer!);
                                                 }));
                                           },
                                           child: VerticalListDesainer(desainer: desainer!)

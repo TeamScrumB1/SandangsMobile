@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sandangs/api/api_top_desainer.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/desainer_model.dart';
+import 'package:sandangs/pages/detail_desainer.dart';
 import 'package:sandangs/pages/pilih_desainer.dart';
 import 'package:sandangs/widget/appbar_custom/appbar_tittle.dart';
 import 'package:sandangs/widget/kategori/kategori_produk.dart';
@@ -15,12 +16,6 @@ class DesainerExplore extends StatefulWidget {
 }
 
 class _DesainerExploreState extends State<DesainerExplore> {
-  var keranjang;
-  var state;
-  var desainer;
-  var list;
-
-  @override
   late Future<Desainer> allDesainerApi;
 
   @override
@@ -32,27 +27,24 @@ class _DesainerExploreState extends State<DesainerExplore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarTittle(),
+      appBar: const AppBarTittle(),
       body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 20),
-              ),
-              Text(
-                "Explore Desainer",
-                style: Theme.of(context).textTheme.headline4!.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: secondaryColor,
-                  fontSize: 25,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  "Explore Desainer",
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                    fontWeight: FontWeight.w800,
+                    color: secondaryColor,
+                    fontSize: 25,
+                  ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-              ),
-              KategoriProduk(),
+              const KategoriProduk(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -65,7 +57,7 @@ class _DesainerExploreState extends State<DesainerExplore> {
                               fontSize: 16,
                             )
                         ),
-                        Spacer(),
+                        const Spacer(),
                         TextButton(
                           style: TextButton.styleFrom(),
                           onPressed: () {
@@ -92,22 +84,22 @@ class _DesainerExploreState extends State<DesainerExplore> {
                           FutureBuilder(
                             future: allDesainerApi,
                             builder: (context, AsyncSnapshot<Desainer> snapshot) {
-                              state = snapshot.connectionState;
+                              var state = snapshot.connectionState;
                               if (state != ConnectionState.done) {
-                                return Center(child: CircularProgressIndicator());
+                                return const Center(child: CircularProgressIndicator());
                               } else {
                                 if (snapshot.hasData) {
                                   return ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     itemCount: snapshot.data?.desainer.length,
                                     itemBuilder: (context, index) {
-                                      desainer = snapshot.data?.desainer[index];
+                                      var desainer = snapshot.data?.desainer[index];
                                       return InkWell(
                                           onTap: () {
                                             Navigator.push(context,
                                                 MaterialPageRoute(builder: (context) {
-                                                  return Scaffold();
+                                                  return DetailDesainer(desainer: desainer!);
                                                 }));
                                           },
                                           child: VerticalListDesainer(desainer: desainer!)
@@ -117,7 +109,7 @@ class _DesainerExploreState extends State<DesainerExplore> {
                                 } else if (snapshot.hasError) {
                                   return Center(child: Text(snapshot.error.toString()));
                                 } else {
-                                  return Text('');
+                                  return const Text('');
                                 }
                               }
                             },
