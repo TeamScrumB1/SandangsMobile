@@ -11,28 +11,58 @@ class FeedsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(1.0),
-      ),
-      elevation: 1,
-      child: Column(
+    return Container(
+      child: Stack(
         children: [
-          Image(
-            fit: BoxFit.fill,
-            width: size.width * 0.5,
-            height: size.height * 0.147,
-            image: CachedNetworkImageProvider(
-              produk.imgProduk,
+          Card(
+            elevation: 1,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image(
+                fit: BoxFit.fill,
+                width: size.width * 0.5,
+                height: size.height * 0.18,
+                image: CachedNetworkImageProvider(
+                  produk.imgProduk,
+                ),
+              ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+          Positioned(
+            top: size.height * 0.19,
+            left: 5,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  produk.nama,
+                  style : TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      size: 15,
+                      color: Colors.amber,
+                    ),
+                    Text(
+                      produk.rating+"/5",
+                      style : TextStyle(
+                        fontSize: 11,
+                        // fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
     );

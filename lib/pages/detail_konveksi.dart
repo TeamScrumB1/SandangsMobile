@@ -18,23 +18,23 @@ class DetailKonveksi extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        elevation: 1,
         leading: IconButton(
           onPressed: () {Navigator.pop(context);},
-          icon: const Icon(
+          icon: Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.white
+              color: secondaryColor,
           ),
         ),
-        title: const Text(
-            'Profil Desainer',
+        title: Text(
+            'Profil Konveksi',
             style: TextStyle(
-              color: Colors.white,
+              color: secondaryColor,
               fontWeight: FontWeight.w600,
               fontSize: 20,
             )
         ),
-        backgroundColor: secondaryColor,
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,7 +49,7 @@ class DetailKonveksi extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('lib/assets/images/banner.jpg'),
+                        image: AssetImage('lib/assets/images/bg-profile.jpg'),
                         fit: BoxFit.fill,
                       ),
                       color: Colors.white),

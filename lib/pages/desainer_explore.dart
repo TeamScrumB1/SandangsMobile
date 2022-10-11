@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sandangs/api/api_top_desainer.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/desainer_model.dart';
 import 'package:sandangs/pages/detail_desainer.dart';
 import 'package:sandangs/pages/pilih_desainer.dart';
-import 'package:sandangs/widget/appbar_custom/appbar_tittle.dart';
 import 'package:sandangs/widget/kategori/kategori_produk.dart';
 import 'package:sandangs/widget/listview/vertical_list_desainer.dart';
 
@@ -27,21 +27,36 @@ class _DesainerExploreState extends State<DesainerExplore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarTittle(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_rounded),
+          color: secondaryColor,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Explore Desainer",
+          style: tittleDark,
+        ),
+        actions: [
+          Center(
+            child: IconButton(
+              icon  : Icon(
+                Icons.shopping_cart,
+                size: 25,
+                color: secondaryColor,
+              ),
+              onPressed: (){},
+            ),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  "Explore Desainer",
-                  style: Theme.of(context).textTheme.headline4!.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: secondaryColor,
-                    fontSize: 25,
-                  ),
-                ),
-              ),
               const KategoriProduk(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sandangs/constant.dart';
-import 'package:sandangs/widget/appbar_custom/appbar_tittle.dart';
 import 'package:sandangs/widget/gridview/produk_gridview.dart';
 import 'package:sandangs/widget/kategori/kategori_produk.dart';
 import 'package:sandangs/widget/slideview/slideview.dart';
@@ -18,21 +17,39 @@ class _MallState extends State<Mall> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarTittle(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_rounded),
+          color: secondaryColor,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Sandangs Mall",
+          style: tittleDark,
+        ),
+        actions: [
+          Center(
+            child: IconButton(
+              icon  : Icon(
+                Icons.shopping_cart,
+                size: 25,
+                color: secondaryColor,
+              ),
+              onPressed: (){},
+            ),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               SlideView(),
               Container(
                 margin: EdgeInsets.only(top: 10),
-              ),
-              Text(
-                "Mall",
-                style: Theme.of(context).textTheme.headline4!.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: secondaryColor,
-                  fontSize: 25,
-                ),
               ),
               KategoriProduk(),
               Padding(

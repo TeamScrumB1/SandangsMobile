@@ -3,7 +3,6 @@ import 'package:sandangs/api/api_top_konveksi.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/konveksi_model.dart';
 import 'package:sandangs/pages/pilih_konveksi.dart';
-import 'package:sandangs/widget/appbar_custom/appbar_tittle.dart';
 import 'package:sandangs/widget/kategori/kategori_produk.dart';
 import 'package:sandangs/widget/listview/vertical_list_konveksi.dart';
 
@@ -32,25 +31,37 @@ class _KonveksiExploreState extends State<KonveksiExplore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarTittle(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 1,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_rounded),
+          color: secondaryColor,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Explore Konveksi",
+          style: tittleDark,
+        ),
+        actions: [
+          Center(
+            child: IconButton(
+              icon  : Icon(
+                Icons.shopping_cart,
+                size: 25,
+                color: secondaryColor,
+              ),
+              onPressed: (){},
+            ),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: 20),
-              ),
-              Text(
-                "Explore Konveksi",
-                style: Theme.of(context).textTheme.headline4!.copyWith(
-                  fontWeight: FontWeight.w800,
-                  color: secondaryColor,
-                  fontSize: 25,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 10),
-              ),
-              KategoriProduk(),
+              const KategoriProduk(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(

@@ -75,7 +75,7 @@ class _FittingRoomState extends State<FittingRoom> {
                           Container(
                             width: size.width,
                             height: size.height*0.4,
-                            margin: EdgeInsets.only(top: size.height*0.15),
+                            margin: EdgeInsets.only(top: size.height*0.15, left: size.width*0.1),
                             child: InteractiveViewer(
                               boundaryMargin: EdgeInsets.symmetric(horizontal: 50,vertical: 50),
                               minScale: 0.1,
@@ -83,13 +83,16 @@ class _FittingRoomState extends State<FittingRoom> {
                               child: SizedBox(
                                 width: 200,
                                 height: 200,
-                                child: Image.network(busanaBawahan),
+                                child: busanaBawahan == 'lib/assets/images/iconBawahan.png' ?
+                                       Image.asset('lib/assets/images/jeans.png')
+                                       : Image.network(busanaBawahan),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          Container(
                             width: size.width,
                             height: size.height*0.3,
+                            margin: EdgeInsets.only(left: size.width*0.1),
                             child: InteractiveViewer(
                               boundaryMargin: EdgeInsets.symmetric(horizontal: 40,vertical: 40),
                               minScale: 0.01,
@@ -97,16 +100,19 @@ class _FittingRoomState extends State<FittingRoom> {
                               child: SizedBox(
                                 width: 200,
                                 height: 200,
-                                child: Image.network(busanaAtasan),
+                                child: busanaAtasan == 'lib/assets/images/iconAtasan.png' ?
+                                       Image.asset('lib/assets/images/jaket.png')
+                                       :Image.network(busanaAtasan),
                               ),
                             ),
                           ),
                         ],
                       ) : Stack(
                         children: [
-                          SizedBox(
+                          Container(
                             width: size.width,
                             height: size.height*0.3,
+                            margin: EdgeInsets.only(left: size.width*0.1),
                             child: InteractiveViewer(
                               boundaryMargin: EdgeInsets.symmetric(horizontal: 40,vertical: 40),
                               minScale: 0.01,
@@ -114,14 +120,16 @@ class _FittingRoomState extends State<FittingRoom> {
                               child: SizedBox(
                                 width: 200,
                                 height: 200,
-                                child: Image.network(busanaAtasan),
+                                child: busanaAtasan == 'lib/assets/images/iconAtasan.png' ?
+                                       Image.asset('lib/assets/images/jaket.png')
+                                       :Image.network(busanaAtasan),
                               ),
                             ),
                           ),
                           Container(
                             width: size.width,
                             height: size.height*0.4,
-                            margin: EdgeInsets.only(top: size.height*0.15),
+                            margin: EdgeInsets.only(top: size.height*0.15, left: size.width*0.1),
                             child: InteractiveViewer(
                               boundaryMargin: EdgeInsets.symmetric(horizontal: 50,vertical: 50),
                               minScale: 0.1,
@@ -129,7 +137,9 @@ class _FittingRoomState extends State<FittingRoom> {
                               child: SizedBox(
                                 width: 200,
                                 height: 200,
-                                child: Image.network(busanaBawahan),
+                                child: busanaBawahan == 'lib/assets/images/iconBawahan.png' ?
+                                       Image.asset('lib/assets/images/jeans.png')
+                                       : Image.network(busanaBawahan),
                               ),
                             ),
                           ),
@@ -159,7 +169,9 @@ class _FittingRoomState extends State<FittingRoom> {
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                backgroundImage: CachedNetworkImageProvider(busanaAtasan),
+                                backgroundImage: busanaAtasan == "lib/assets/images/iconAtasan.png" ?
+                                                 AssetImage('lib/assets/images/iconAtasan.png') as ImageProvider
+                                                 : CachedNetworkImageProvider(busanaAtasan),
                                 radius: 32,
                               ),
                             )
@@ -177,7 +189,9 @@ class _FittingRoomState extends State<FittingRoom> {
                               },
                               child: CircleAvatar(
                                 backgroundColor: Colors.white,
-                                backgroundImage: CachedNetworkImageProvider(busanaBawahan),
+                                backgroundImage: busanaBawahan == "lib/assets/images/iconBawahan.png" ?
+                                                 AssetImage('lib/assets/images/iconBawahan.png') as ImageProvider
+                                                 : CachedNetworkImageProvider(busanaBawahan),
                                 radius: 32,
                               ),
                             )

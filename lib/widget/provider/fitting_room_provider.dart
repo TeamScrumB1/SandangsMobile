@@ -5,8 +5,8 @@ class FittingRoomProv with ChangeNotifier{
   int indexKategori = 0;
   int swap = 0;
   int fitur = 0;
-  String busanaAtasan = "lib/assets/images/jaket.png";
-  String busanaBawahan = "lib/assets/images/celana.png";
+  String busanaAtasan = "lib/assets/images/iconAtasan.png";
+  String busanaBawahan = "lib/assets/images/iconBawahan.png";
 
 
   setBusana(String atas, String bawah){

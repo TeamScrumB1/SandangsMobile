@@ -26,11 +26,23 @@ class _BottomMenuState extends State<BottomMenu> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: secondaryColor,
-        child: Image.asset(
-          'lib/assets/images/logoWhite.png',
-          height: 50,
-          width: 50,
+        backgroundColor: Colors.transparent,
+        child: Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              colors: [thirdColor,secondaryColor],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+          child: Image.asset(
+            'lib/assets/images/logoWhite.png',
+            height: 50,
+            width: 50,
+          ),
         ),
         onPressed: (){
           Navigator.push(
