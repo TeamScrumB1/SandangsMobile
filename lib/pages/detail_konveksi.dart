@@ -37,135 +37,152 @@ class DetailKonveksi extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
           children: <Widget>[
-            Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
-              children: <Widget>[
-                Container(
-                  height: size.height * 0.20,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('lib/assets/images/bg-profile.jpg'),
-                        fit: BoxFit.fill,
-                      ),
-                      color: Colors.white),
-                ),
-                Positioned(
-                    top: MediaQuery.of(context).size.height * 0.09,
-                    left: MediaQuery.of(context).size.width * 0.25,
-                    right: MediaQuery.of(context).size.width * 0.25,
-                    child: CircleAvatar(
-                      radius: 88,
-                      backgroundColor: const Color(0xFFFFFFFF),
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(konveksi.imgProfil),
-                        radius: 80,
-                      ),
-                    )
-                ),
-              ],
-            ),
-            Container(height: size.height * 0.12),
-            Column(
-              children: <Widget>[
-                Text(
-                  konveksi.nama,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-                Text(
-                  konveksi.bio,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'Poppins',
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  children: <Widget> [
-                    const Icon(
-                        Icons.star_border,
-                        color: Colors.black
+            Container(
+              height: size.height*0.5,
+              child: Stack(
+                  children : [
+                    Image(
+                      image: AssetImage('lib/assets/images/bg-profile.jpg'),
+                      fit: BoxFit.cover,
+                      height: size.height*0.25,
+                      width: size.width,
                     ),
-                    Text(
-                        konveksi.rating + '/5 ',
+                  ]
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: size.height*0.2),
+              decoration: BoxDecoration(
+                boxShadow: [BoxShadow(
+                  blurRadius: 2,
+                  color: Colors.grey,
+                )],
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(40),
+                  topLeft: Radius.circular(40),
+                ),
+                color: Colors.white,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: size.height*0.11,
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        konveksi.nama,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                      Text(
+                        konveksi.bio,
+                        textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w300,
                           fontFamily: 'Poppins',
-                        )
-                    ),
-                    Container(width: size.width*0.08),
-                    Row(
-                      children: <Widget> [
-                        const Icon(
-                            Icons.task_outlined,
-                            color: Colors.black
                         ),
-                        Text(
-                          konveksi.jmlhProject + ' ',
-                          style: const TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'Poppins',
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget> [
+                          const Icon(
+                              Icons.star_border,
+                              color: Colors.black
                           ),
-                        ),
-                      ], // <Widget>[]
-                    ),
-                    Container(width: size.width*0.08),
-                    Row(
-                      children: <Widget> [
-                        ElevatedButton(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(
-                                  Icons.chat_outlined,
-                                  size: 20.0
-                              ), // <-- Icon
+                          Text(
+                              konveksi.rating + '/5 ',
+                              style: const TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Poppins',
+                              )
+                          ),
+                          Container(width: size.width*0.08),
+                          Row(
+                            children: <Widget> [
+                              const Icon(
+                                  Icons.task_outlined,
+                                  color: Colors.black
+                              ),
                               Text(
-                                ' Chat ',
-                                style: TextStyle(
+                                konveksi.jmlhProject + ' ',
+                                style: const TextStyle(
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.w300,
                                   fontFamily: 'Poppins',
                                 ),
                               ),
-                            ],
+                            ], // <Widget>[]
                           ),
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(secondaryColor),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: BorderSide(color: secondaryColor)
+                          Container(width: size.width*0.08),
+                          Row(
+                            children: <Widget> [
+                              ElevatedButton(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Icon(
+                                        Icons.chat_outlined,
+                                        size: 20.0
+                                    ), // <-- Icon
+                                    Text(
+                                      ' Chat ',
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(secondaryColor),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        side: BorderSide(color: secondaryColor)
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () => _launchURL(konveksi.linkWa),
                               ),
-                            ),
+                            ], // <Widget>[]
                           ),
-                          onPressed: () => _launchURL(konveksi.linkWa),
-                        ),
-                      ], // <Widget>[]
-                    ),
-                  ], // <Widget>[]
-                ),
-                Container(height: size.height * 0.10),
-              ],
+                        ], // <Widget>[]
+                      ),
+                      Container(height: size.height * 0.10),
+                    ],
+                  ),
+                  const GridViewFeeds(),
+                ],
+              ),
             ),
-            const GridViewFeeds(),
+            Positioned(
+                top: MediaQuery.of(context).size.height * 0.08,
+                left: MediaQuery.of(context).size.width * 0.25,
+                right: MediaQuery.of(context).size.width * 0.25,
+                child: CircleAvatar(
+                  radius: 88,
+                  backgroundColor: const Color(0xFFFFFFFF),
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(konveksi.imgProfil),
+                    radius: 80,
+                  ),
+                )
+            ),
           ],
         ),
       ),

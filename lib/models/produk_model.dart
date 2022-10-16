@@ -68,7 +68,7 @@ class ProdukElement{
     id: json["id"],
     nama: json["nama"],
     imgProduk: json["img_produk"],
-    imgProcessing: json["img_produk"],
+    imgProcessing: json["img_processing"],
     harga: json["harga"],
     rating: json["rating"],
     deskripsi: json["deskripsi"],

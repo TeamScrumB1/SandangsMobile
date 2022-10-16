@@ -19,6 +19,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
   PlatformFile? _platformFile;
   late AnimationController loadingController;
   late Future<Project> projectApi;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -77,221 +78,238 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
           children: <Widget>[
             SingleChildScrollView(
               padding: EdgeInsets.only(left: 20,right: 20,top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Judul',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Masukkan judul project anda",
-                    ),
-                    maxLength: 25,
-                    maxLines: 1,
-                    // controller: judul,
-                  ),
-                  Text(
-                    'Spesifikasi Busana',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: "Masukkan kebutuhan busana anda disini ...",
-                    ),
-                    maxLength: 255,
-                    maxLines: 4,
-                    // controller: kebutuhan,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 200,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Budget',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                hintText: "Rp. xxxxxx",
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines: 1,
-                              keyboardType: TextInputType.number,
-                              validator: (value){
-                                if(value!.isEmpty){
-                                  return 'Please input your budget';
-                                }
-                              },
-                              // controller: budget,
-                            ),
-                          ],
-                        ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Judul',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Container(
-                        width: 110,
-                        margin: EdgeInsets.only(left: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Jumlah',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                hintText: "xxx pcs",
-                                border: OutlineInputBorder(),
-                              ),
-                              maxLines: 1,
-                              keyboardType: TextInputType.number,
-                              validator: (value){
-                                if(value!.isEmpty){
-                                  return 'Please input your budget';
-                                }
-                              },
-                              // controller: budget,
-                            ),
-                          ],
-                        ),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Masukkan judul project anda",
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Lampiran',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      validator: (value){
+                        if(value == null || value.isEmpty){
+                          return 'Silahkan masukkan judul projek';
+                        }
+                      },
+                      maxLength: 25,
+                      maxLines: 1,
+                      // controller: judul,
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: selectFile,
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-                        child: DottedBorder(
-                          borderType: BorderType.RRect,
-                          radius: Radius.circular(6),
-                          dashPattern: [10, 4],
-                          strokeCap: StrokeCap.round,
-                          color: Colors.blue.shade400,
-                          child: Container(
-                            width: double.infinity,
-                            height: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.blue.shade50.withOpacity(.3),
-                                borderRadius: BorderRadius.circular(6)
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.folder_open, color: Colors.blue, size: 40,),
-                                SizedBox(height: 15,),
-                                Text('Tambahkan File Desain Anda', style: TextStyle(fontSize: 15, color: Colors.grey.shade400),),
-                              ],
-                            ),
-                          ),
-                        )
+                    Text(
+                      'Spesifikasi Busana',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  _platformFile != null
-                      ? Container(
-                      padding: EdgeInsets.all(5),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Desain Anda',
-                              style: TextStyle(color: Colors.grey.shade600, fontSize: 15, ),),
-                            SizedBox(height: 10,),
-                            Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.shade200,
-                                        offset: Offset(0, 1),
-                                        blurRadius: 3,
-                                        spreadRadius: 2,
-                                      )
-                                    ]
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Masukkan kebutuhan busana anda disini ...",
+                      ),
+                      maxLength: 255,
+                      maxLines: 4,
+                      validator: (value){
+                        if(value == null || value.isEmpty){
+                          return 'Silahkan masukkan spesifikasi busana';
+                        }
+                      },
+                      // controller: kebutuhan,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 200,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Budget',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                child: Row(
-                                    children: [
-                                      ClipRRect(
-                                          borderRadius: BorderRadius.circular(6),
-                                          child: Image.file(_file!, width: 70,)
-                                      ),
-                                      SizedBox(width: 10,),
-                                      Expanded(
-                                          child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(_platformFile!.name,
-                                                  style: TextStyle(fontSize: 13, color: Colors.black),),
-                                                SizedBox(height: 5,),
-                                                Text('${(_platformFile!.size / 1024).ceil()} KB',
-                                                  style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
-                                                ),
-                                                SizedBox(height: 5,),
-                                                Container(
-                                                  height: 5,
-                                                  clipBehavior: Clip.hardEdge,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(6),
-                                                    color: Colors.blue.shade50,
-                                                  ),
-                                                  child: LinearProgressIndicator(
-                                                    value: loadingController.value,
-                                                  ),
-                                                ),
-                                              ]
-                                          )
-                                      )
-                                    ]
-                                )
-                            )
-                          ]
-                      )
-                  ): SizedBox(height: 5),
-                  Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [thirdColor,secondaryColor],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: "Rp. xxxxxx",
+                                  border: OutlineInputBorder(),
+                                ),
+                                maxLines: 1,
+                                keyboardType: TextInputType.number,
+                                validator: (value){
+                                  if(value == null || value.isEmpty){
+                                    return 'budget projek  kosong';
+                                  }
+                                },
+                                // controller: budget,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 110,
+                          margin: EdgeInsets.only(left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Jumlah',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: "xxx pcs",
+                                  border: OutlineInputBorder(),
+                                ),
+                                maxLines: 1,
+                                keyboardType: TextInputType.number,
+                                validator: (value){
+                                  if(value == null || value.isEmpty){
+                                    return 'jumlah kosong';
+                                  }
+                                },
+                                // controller: budget,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    child: TextButton(
-                      onPressed: (){},
-                      child: Center(
-                        child: Text("Submit", style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),),
+                    SizedBox(height: 10),
+                    Text(
+                      'Lampiran',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  )
-                ],
+                    GestureDetector(
+                      onTap: selectFile,
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                          child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: Radius.circular(6),
+                            dashPattern: [10, 4],
+                            strokeCap: StrokeCap.round,
+                            color: Colors.blue.shade400,
+                            child: Container(
+                              width: double.infinity,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: Colors.blue.shade50.withOpacity(.3),
+                                  borderRadius: BorderRadius.circular(6)
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.folder_open, color: Colors.blue, size: 40,),
+                                  SizedBox(height: 15,),
+                                  Text('Tambahkan File Desain Anda', style: TextStyle(fontSize: 15, color: Colors.grey.shade400),),
+                                ],
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                    _platformFile != null
+                        ? Container(
+                        padding: EdgeInsets.all(5),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Desain Anda',
+                                style: TextStyle(color: Colors.grey.shade600, fontSize: 15, ),),
+                              SizedBox(height: 10,),
+                              Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.shade200,
+                                          offset: Offset(0, 1),
+                                          blurRadius: 3,
+                                          spreadRadius: 2,
+                                        )
+                                      ]
+                                  ),
+                                  child: Row(
+                                      children: [
+                                        ClipRRect(
+                                            borderRadius: BorderRadius.circular(6),
+                                            child: Image.file(_file!, width: 70,)
+                                        ),
+                                        SizedBox(width: 10,),
+                                        Expanded(
+                                            child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(_platformFile!.name,
+                                                    style: TextStyle(fontSize: 13, color: Colors.black),),
+                                                  SizedBox(height: 5,),
+                                                  Text('${(_platformFile!.size / 1024).ceil()} KB',
+                                                    style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+                                                  ),
+                                                  SizedBox(height: 5,),
+                                                  Container(
+                                                    height: 5,
+                                                    clipBehavior: Clip.hardEdge,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(6),
+                                                      color: Colors.blue.shade50,
+                                                    ),
+                                                    child: LinearProgressIndicator(
+                                                      value: loadingController.value,
+                                                    ),
+                                                  ),
+                                                ]
+                                            )
+                                        )
+                                      ]
+                                  )
+                              )
+                            ]
+                        )
+                    ): SizedBox(height: 5),
+                    Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [thirdColor,secondaryColor],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextButton(
+                        onPressed: (){
+                          if(_formKey.currentState!.validate()){
+                            print('Haloo cuy');
+                          }
+                        },
+                        child: Center(
+                          child: Text("Submit", style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             SingleChildScrollView(

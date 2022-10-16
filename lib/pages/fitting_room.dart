@@ -442,9 +442,9 @@ class _FittingRoomState extends State<FittingRoom> {
                                     onTap: () {
                                       setState(() {
                                         if(status == 0){
-                                          fittingRoom.setBusana(produk.imgProduk, fittingRoom.getBawahan());
+                                          fittingRoom.setBusana(produk.imgProcessing, fittingRoom.getBawahan());
                                         }else{
-                                          fittingRoom.setBusana(fittingRoom.getAtasan(), produk.imgProduk);
+                                          fittingRoom.setBusana(fittingRoom.getAtasan(), produk.imgProcessing);
                                         }
                                       });
                                     },

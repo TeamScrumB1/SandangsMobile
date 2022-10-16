@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/pages/home_page.dart';
 import 'package:sandangs/pages/pre_order.dart';
+import 'package:sandangs/widget/authentication/shared_preferences.dart';
 import 'package:sandangs/widget/bottom_menu/list_menu.dart';
 
 class BottomMenu extends StatefulWidget {
@@ -14,6 +15,17 @@ class BottomMenu extends StatefulWidget {
 class _BottomMenuState extends State<BottomMenu> {
   final PageStorageBucket bucket = PageStorageBucket();
   ListMenu statusLayar = ListMenu(0, const HomePages());
+  final PrefServices _prefService = PrefServices();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _prefService.readCache().then((value) {
+      var userData = value;
+      print('username : ' + userData.username.toString());
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

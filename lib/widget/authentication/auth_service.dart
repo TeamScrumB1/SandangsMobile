@@ -3,38 +3,70 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AuthService{
   static FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<AuthResult> signIn({required String email,required String pass}) async {
-    try{
-      UserCredential result = await auth.signInWithEmailAndPassword(
-        email: email,
-        password: pass,
+  Future<User?> signIn({required String email,required String password}) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
       );
-      return AuthResult(user: result.user);
-    } catch(e) {
-      return AuthResult(message: e.toString());
+      return FirebaseAuth.instance.currentUser;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        rethrow;
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+        rethrow;
+      }
     }
+    return null;
   }
 
-  Future<AuthResult> createUser({required String email,required String pass}) async {
-    try{
-      UserCredential result = await auth.createUserWithEmailAndPassword(
+  Future verifyEmail() async {
+    final user = FirebaseAuth.instance.currentUser;
+    await user?.sendEmailVerification();
+  }
+
+  Future<User?> createUser({required String email, required String password}) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
-        password: pass,
+        password: password,
       );
-      return AuthResult(user: result.user);
-    } catch(e) {
-      return AuthResult(message: e.toString());
+
+      return FirebaseAuth.instance.currentUser;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+      rethrow;
+    } catch (e) {
+      print(e);
+      rethrow;
     }
   }
 
   static void signOut(){
     auth.signOut();
   }
-}
 
-class AuthResult{
-  final User? user;
-  String? message;
+  Future<bool> checkEmail ({required String email}) async {
+    try{
+      final list  = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+      if(list.isNotEmpty){
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e){
+      print(e.toString());
+      rethrow;
+    }
+  }
 
-  AuthResult({this.user, this.message});
+  void resetPassword(String email) async {
+    await auth.sendPasswordResetEmail(email: email);
+  }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sandangs/pages/login.dart';
-import 'package:sandangs/widget/authentication/auth_service.dart';
 import 'package:sandangs/widget/bottom_menu/bottom_menu.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,23 +12,9 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // @override
-  // initState(){
-  //   Timer(
-  //     const Duration(seconds: 3),
-  //       () => Navigator.pushReplacement(
-  //           context,
-  //           MaterialPageRoute(
-  //               builder: (context) =>  LoginScreen(),
-  //           )
-  //       )
-  //   );
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
-    User? firebaseUser = AuthResult().user;
 
     setState(() {
       Timer(
@@ -38,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
               context,
               MaterialPageRoute(
                   builder: (context){
-                    if(firebaseUser != null){
+                    if(FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified){
                       return const BottomMenu();
                     }else{
                       return const LoginScreen();

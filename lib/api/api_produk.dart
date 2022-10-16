@@ -11,7 +11,7 @@ class ApiServiceProduct{
     if(response.statusCode == 200){
       return Produk.fromJson(json.decode(response.body));
     }else{
-      throw Exception('Failde to load top Headlines');
+      throw Exception('Failed to load top Headlines');
     }
   }
 }

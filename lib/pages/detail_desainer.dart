@@ -57,8 +57,7 @@ class DetailDesainer extends StatelessWidget {
               margin: EdgeInsets.only(top: size.height*0.2),
               decoration: BoxDecoration(
                 boxShadow: [BoxShadow(
-                  blurRadius: 3,
-                  spreadRadius: 2,
+                  blurRadius: 2,
                   color: Colors.grey,
                 )],
                 borderRadius: BorderRadius.only(
