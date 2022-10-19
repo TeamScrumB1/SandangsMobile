@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sandangs/api/api_project_order.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/project_model.dart';
+import 'package:sandangs/variables.dart';
 import 'package:sandangs/widget/card/project_card.dart';
+import 'package:http/http.dart' as http;
 
 class PreOrder extends StatefulWidget {
   const PreOrder({Key? key}) : super(key: key);
@@ -20,6 +24,10 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
   late AnimationController loadingController;
   late Future<Project> projectApi;
   final _formKey = GlobalKey<FormState>();
+  final _judul = new TextEditingController();
+  final _kebutuhan = new TextEditingController();
+  final _biaya = new TextEditingController();
+  final _jumlah = new TextEditingController();
 
   @override
   void initState() {
@@ -27,9 +35,9 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
       vsync: this,
       duration: const Duration(seconds: 5),
     )..addListener(() { setState(() {}); });
-
-    projectApi = ApiServiceProjectAll().topHeadlines();
+    projectApi = ApiServiceProject().topHeadlines();
     super.initState();
+    print(idUserGlob);
   }
 
   @override
@@ -102,7 +110,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                       },
                       maxLength: 25,
                       maxLines: 1,
-                      // controller: judul,
+                      controller: _judul,
                     ),
                     Text(
                       'Spesifikasi Busana',
@@ -123,7 +131,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                           return 'Silahkan masukkan spesifikasi busana';
                         }
                       },
-                      // controller: kebutuhan,
+                      controller: _kebutuhan,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -152,7 +160,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                                     return 'budget projek  kosong';
                                   }
                                 },
-                                // controller: budget,
+                                controller: _biaya,
                               ),
                             ],
                           ),
@@ -179,10 +187,10 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                                 keyboardType: TextInputType.number,
                                 validator: (value){
                                   if(value == null || value.isEmpty){
-                                    return 'jumlah kosong';
+                                    return 'kosong';
                                   }
                                 },
-                                // controller: budget,
+                                controller: _jumlah,
                               ),
                             ],
                           ),
@@ -301,6 +309,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                         onPressed: (){
                           if(_formKey.currentState!.validate()){
                             print('Haloo cuy');
+                            submit();
                           }
                         },
                         child: Center(
@@ -353,7 +362,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   fit: BoxFit.fill,
-                                  image: AssetImage('lib/Assets/images/empty_preorder.png'),
+                                  image: AssetImage('lib/assets/images/empty-preorder.png'),
                                 ),
                               ),
                             ),
@@ -407,6 +416,71 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
       print('no image selected');
     }
     loadingController.forward();
+  }
+
+  Future submit() async {
+    final uri = Uri.parse("https://fashionizt.yufagency.com/order.php");
+    var request = http.MultipartRequest('POST',uri);
+    request.fields['judul'] = _judul.text;
+    request.fields['kebutuhan'] = _kebutuhan.text;
+    request.fields['biaya'] = _biaya.text;
+    request.fields['id_user'] = idUserGlob ;
+    var pic = await http.MultipartFile.fromPath('lampiran', _file!.path);
+    request.files.add(pic);
+
+    await request.send().then((result) {
+      http.Response.fromStream(result).then((response) {
+        var message = jsonDecode(response.body);
+        if (message == "Error") {
+          Fluttertoast.showToast(
+            msg: "Data Input Failed",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            fontSize: 15,
+            textColor: secondaryColor,
+          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+                return PreOrder();
+              })
+          );
+        } else if (message == "Blank")  {
+          Fluttertoast.showToast(
+            msg: "Please Fill Out The Entire Form",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            fontSize: 15,
+            textColor: secondaryColor,
+          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+                return PreOrder();
+              })
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Preorder Successful",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.TOP,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.white,
+            fontSize: 15,
+            textColor: secondaryColor,
+          );
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
+                return PreOrder();
+              })
+          );
+        }
+      });
+    }).catchError((e) {
+      print(e);
+    });
   }
 }
 

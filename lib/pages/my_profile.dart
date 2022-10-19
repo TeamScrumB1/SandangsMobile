@@ -61,7 +61,7 @@ class _MyProfileState extends State<MyProfile> {
             Container(
               margin: EdgeInsets.only(top: size.height*0.2),
               width: size.width,
-              height: size.height*0.6,
+              height: size.height*0.65,
               decoration: BoxDecoration(
                 boxShadow: [BoxShadow(
                   blurRadius: 2,
@@ -232,7 +232,7 @@ class _MyProfileState extends State<MyProfile> {
                               Text(
                                 '  Log Out',
                                 style: TextStyle(
-                                  color: blackColor,
+                                  color: Colors.red,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                 ),

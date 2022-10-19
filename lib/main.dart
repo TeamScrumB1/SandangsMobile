@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sandangs/pages/login.dart';
 import 'package:sandangs/routes.dart';
+import 'package:sandangs/widget/provider/cart_provider.dart';
 import 'package:sandangs/widget/provider/fitting_room_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  
+
   runApp(const MyApp());
 }
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => FittingRoomProv())
+        ChangeNotifierProvider(create: (context) => FittingRoomProv()),
+        ChangeNotifierProvider(create: (context) => KeranjangProv()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

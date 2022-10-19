@@ -19,7 +19,7 @@ class _DetailProductState extends State<DetailProduct> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: const BottomAppbarDetailProduk(),
+      bottomNavigationBar: BottomAppbarDetailProduk(detail: widget.detail),
       appBar: const AppBarBack(),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(

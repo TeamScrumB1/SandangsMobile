@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sandangs/api/api_get_user.dart';
 import 'package:sandangs/constant.dart';
-import 'package:sandangs/models/user_model.dart';
 import 'package:sandangs/pages/sign_up.dart';
 import 'package:sandangs/widget/authentication/auth_service.dart';
 import 'package:sandangs/widget/authentication/shared_preferences.dart';
 import 'package:sandangs/widget/bottom_menu/bottom_menu.dart';
-import 'package:sandangs/widget/db_helper/db_user.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
