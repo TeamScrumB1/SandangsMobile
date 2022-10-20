@@ -61,10 +61,10 @@ class _MyProfileState extends State<MyProfile> {
             Container(
               margin: EdgeInsets.only(top: size.height*0.2),
               width: size.width,
-              height: size.height*0.65,
+              height: MediaQuery.of(context).size.height * 0.65,
               decoration: BoxDecoration(
                 boxShadow: [BoxShadow(
-                  blurRadius: 2,
+                  blurRadius: 1,
                   color: Colors.grey,
                 )],
                 borderRadius: BorderRadius.only(
@@ -112,7 +112,7 @@ class _MyProfileState extends State<MyProfile> {
                       Container(
                         width: size.width*0.5,
                         height: 37,
-                        margin: EdgeInsets.symmetric(vertical: 10),
+                        margin: EdgeInsets.only(top:10, bottom: 30),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [thirdColor,secondaryColor],
@@ -137,8 +137,8 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       Container(
                         width: size.width-40,
-                        height: 38,
-                        margin: EdgeInsets.symmetric(vertical: 5),
+                        height: 43,
+                        margin: EdgeInsets.symmetric(vertical: 7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.white,
@@ -170,8 +170,8 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       Container(
                         width: size.width-40,
-                        height: 38,
-                        margin: EdgeInsets.symmetric(vertical: 5),
+                        height: 43,
+                        margin: EdgeInsets.symmetric(vertical: 7),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.white,
@@ -206,8 +206,8 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       Container(
                         width: size.width-40,
-                        height: 38,
-                        margin: EdgeInsets.symmetric(vertical: 5),
+                        height: 43,
+                        margin: EdgeInsets.symmetric(vertical: 7),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.white,

@@ -109,7 +109,7 @@ class _DetailProductState extends State<DetailProduct> {
                             backgroundImage: CachedNetworkImageProvider(
                               widget.detail.imgDesainer,
                             ),
-                            radius: 50,
+                            radius: 45,
                           ),
                           SizedBox(width: 43,),
                           Column(

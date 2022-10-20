@@ -39,17 +39,10 @@ class _CartScreenState extends State<CartScreen> {
 
     return listKeranjang.isEmpty ? Scaffold (body: CartEmpty()) : Scaffold(
       bottomNavigationBar: BottomAppBar(
+        elevation: 1,
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0,3),
-                  blurRadius: 3,
-                  spreadRadius: 3,
-                ),
-              ]
           ),
           height: size.height*0.07,
           child: Row(

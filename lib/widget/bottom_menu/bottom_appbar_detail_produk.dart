@@ -24,17 +24,10 @@ class _BottomAppbarDetailProdukState extends State<BottomAppbarDetailProduk> {
     var keranjang = Provider.of<KeranjangProv>(context);
 
     return BottomAppBar(
+      elevation: 1,
       child: Container(
         decoration: const BoxDecoration(
             color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                offset: Offset(0,3),
-                blurRadius: 3,
-                spreadRadius: 3,
-              )
-            ]
         ),
         height: size.height*0.07,
         child: Container(
@@ -43,7 +36,7 @@ class _BottomAppbarDetailProdukState extends State<BottomAppbarDetailProduk> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: size.width*0.18,
+                width: size.width*0.17,
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
                 decoration: BoxDecoration(
@@ -94,7 +87,7 @@ class _BottomAppbarDetailProdukState extends State<BottomAppbarDetailProduk> {
                 child: TextButton(
                   onPressed: (){},
                   child: Text(
-                    'Buy Now',
+                    'Beli Sekarang',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
