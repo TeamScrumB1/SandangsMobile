@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sandangs/api/api_project_order.dart';
 import 'package:sandangs/constant.dart';
 import 'package:sandangs/models/project_model.dart';
+import 'package:sandangs/pages/detail_project.dart';
 import 'package:sandangs/variables.dart';
 import 'package:sandangs/widget/card/project_card.dart';
 import 'package:http/http.dart' as http;
@@ -106,6 +107,8 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                       validator: (value){
                         if(value == null || value.isEmpty){
                           return 'Silahkan masukkan judul projek';
+                        }else if(value.contains("'") || value.contains('"')){
+                          return "Judul tidak boleh ada symbol petik";
                         }
                       },
                       maxLength: 25,
@@ -129,6 +132,8 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                       validator: (value){
                         if(value == null || value.isEmpty){
                           return 'Silahkan masukkan spesifikasi busana';
+                        }else if(value.contains("'") || value.contains('"')){
+                          return "Spesifikasi tidak boleh ada symbol petik";
                         }
                       },
                       controller: _kebutuhan,
@@ -158,6 +163,8 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                                 validator: (value){
                                   if(value == null || value.isEmpty){
                                     return 'budget projek  kosong';
+                                  }else if(value.contains(".") || value.contains(',')){
+                                    return "budget tanpa koma/titik";
                                   }
                                 },
                                 controller: _biaya,
@@ -188,6 +195,8 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                                 validator: (value){
                                   if(value == null || value.isEmpty){
                                     return 'kosong';
+                                  }else if(value.contains(".") || value.contains(',')){
+                                    return "tanpa ' . ' / ' , '";
                                   }
                                 },
                                 controller: _jumlah,
@@ -308,7 +317,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                       child: TextButton(
                         onPressed: (){
                           if(_formKey.currentState!.validate()){
-                            print('Haloo cuy');
+                            print(_kebutuhan.text);
                             submit();
                           }
                         },
@@ -343,7 +352,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return Container();
+                                        return DetailProject();
                                         // return DetailProjectUser(project :project!);
                                       }));
                                 },
