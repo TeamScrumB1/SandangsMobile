@@ -305,6 +305,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                         )
                     ): SizedBox(height: 5),
                     Container(
+                      margin: EdgeInsets.only(top: 10),
                       height: 40,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(

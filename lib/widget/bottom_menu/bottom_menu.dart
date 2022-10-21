@@ -124,12 +124,12 @@ class _BottomMenuState extends State<BottomMenu> {
                           children: [
                             Icon(
                               Icons.home_filled,
-                              color: statusLayar.currentTab == 0 ? primaryColor : Colors.grey,
+                              color: statusLayar.currentTab == 0 ? secondaryColor : Colors.grey,
                             ),
                             Text(
                               'Home',
                               style: TextStyle(
-                                color: statusLayar.currentTab == 0 ? primaryColor : Colors.grey,
+                                color: statusLayar.currentTab == 0 ? secondaryColor : Colors.grey,
                                 fontFamily: 'Poppins',
                                 fontSize: 10,
                               ),
@@ -152,12 +152,12 @@ class _BottomMenuState extends State<BottomMenu> {
                           children: [
                             Icon(
                               Icons.event_note_rounded,
-                              color: statusLayar.currentTab == 1 ? primaryColor : Colors.grey,
+                              color: statusLayar.currentTab == 1 ? secondaryColor : Colors.grey,
                             ),
                             Text(
                               'Project',
                               style: TextStyle(
-                                color: statusLayar.currentTab == 1 ? primaryColor : Colors.grey,
+                                color: statusLayar.currentTab == 1 ? secondaryColor : Colors.grey,
                                 fontFamily: 'Poppins',
                                 fontSize: 10,
                               ),
@@ -197,12 +197,12 @@ class _BottomMenuState extends State<BottomMenu> {
                           children: [
                             Icon(
                               Icons.checkroom,
-                              color: statusLayar.currentTab == 2 ? primaryColor : Colors.grey,
+                              color: statusLayar.currentTab == 2 ? secondaryColor : Colors.grey,
                             ),
                             Text(
                               'Room',
                               style: TextStyle(
-                                color: statusLayar.currentTab == 2 ? primaryColor : Colors.grey,
+                                color: statusLayar.currentTab == 2 ? secondaryColor : Colors.grey,
                                 fontFamily: 'Poppins',
                                 fontSize: 10,
                               ),
@@ -226,12 +226,12 @@ class _BottomMenuState extends State<BottomMenu> {
                           children: [
                             Icon(
                               Icons.account_circle,
-                              color: statusLayar.currentTab == 3 ? primaryColor : Colors.grey,
+                              color: statusLayar.currentTab == 3 ? secondaryColor : Colors.grey,
                             ),
                             Text(
                               'Profile',
                               style: TextStyle(
-                                color: statusLayar.currentTab == 3 ? primaryColor : Colors.grey,
+                                color: statusLayar.currentTab == 3 ? secondaryColor : Colors.grey,
                                 fontFamily: 'Poppins',
                                 fontSize: 10,
                               ),
