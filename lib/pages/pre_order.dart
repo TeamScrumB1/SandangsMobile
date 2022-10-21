@@ -25,10 +25,10 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
   late AnimationController loadingController;
   late Future<Project> projectApi;
   final _formKey = GlobalKey<FormState>();
-  final _judul = new TextEditingController();
-  final _kebutuhan = new TextEditingController();
-  final _biaya = new TextEditingController();
-  final _jumlah = new TextEditingController();
+  final _judul = TextEditingController();
+  final _kebutuhan = TextEditingController();
+  final _biaya = TextEditingController();
+  final _jumlah = TextEditingController();
 
   @override
   void initState() {
@@ -353,8 +353,7 @@ class _PreOrderState extends State<PreOrder> with SingleTickerProviderStateMixin
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                        return DetailProject();
-                                        // return DetailProjectUser(project :project!);
+                                         return DetailProject(project: project!);
                                       }));
                                 },
                                 child: CardProject(project: project!)
