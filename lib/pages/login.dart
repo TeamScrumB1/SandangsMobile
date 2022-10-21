@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.white,
               ),
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                margin: EdgeInsets.symmetric(horizontal: 40, vertical: size.height*0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Container(
                             width: size.width - 40,
-                            margin: EdgeInsets.symmetric(vertical: 10),
+                            margin: EdgeInsets.symmetric(vertical: size.height*0.01),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -316,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           Container(
-                            height: 230,
+                            height: MediaQuery.of(context).size.height * 0.33,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
