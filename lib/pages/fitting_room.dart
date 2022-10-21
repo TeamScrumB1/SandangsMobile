@@ -55,13 +55,12 @@ class _FittingRoomState extends State<FittingRoom> {
     });
 
     return Scaffold(
-      appBar: const AppBarApps(),
+      appBar: AppBarApps(),
       body: ListView(
             children: <Widget>[
               Stack(
                 clipBehavior: Clip.none,
                 children: <Widget>[
-                  // ContainerProduk(atasan: busanaAtasan,bawahan: busanaBawahan,),
                   Container(
                       height: size.height * 0.5,
                       width: size.width,

@@ -19,7 +19,7 @@ class _DetailProductState extends State<DetailProduct> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      bottomNavigationBar: const BottomAppbarDetailProduk(),
+      bottomNavigationBar: BottomAppbarDetailProduk(detail: widget.detail),
       appBar: const AppBarBack(),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
@@ -109,7 +109,7 @@ class _DetailProductState extends State<DetailProduct> {
                             backgroundImage: CachedNetworkImageProvider(
                               widget.detail.imgDesainer,
                             ),
-                            radius: 50,
+                            radius: 45,
                           ),
                           SizedBox(width: 43,),
                           Column(
