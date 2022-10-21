@@ -316,7 +316,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
 
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.35,
+                            height: 230,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
