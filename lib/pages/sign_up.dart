@@ -319,7 +319,7 @@ class _SignUpState extends State<SignUp> {
                           ),
 
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.07,
+                            height: MediaQuery.of(context).size.height * 0.09,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
