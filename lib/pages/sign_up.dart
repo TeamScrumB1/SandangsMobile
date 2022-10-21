@@ -48,6 +48,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Stack(
           alignment: Alignment.topCenter,
@@ -67,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                 color: Colors.white,
               ),
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                margin: EdgeInsets.symmetric(horizontal: 40, vertical: size.height*0.02),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -199,7 +200,7 @@ class _SignUpState extends State<SignUp> {
                             height: size.height * 0.03,
                           ),
                           Container(
-                            margin: EdgeInsets.only(bottom: 10),
+                            margin: EdgeInsets.only(bottom: size.height*0.01),
                             width: size.width-80,
                             height: 37,
                             decoration: BoxDecoration(
@@ -290,7 +291,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           Container(
                             width: size.width-80,
-                            margin: EdgeInsets.symmetric(vertical: 5),
+                            margin: EdgeInsets.symmetric(vertical: size.height*0.005),
                             child: OutlinedButton(
                               onPressed: (){},
                               style: OutlinedButton.styleFrom(
@@ -318,7 +319,7 @@ class _SignUpState extends State<SignUp> {
                           ),
 
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.11,
+                            height: MediaQuery.of(context).size.height * 0.07,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
